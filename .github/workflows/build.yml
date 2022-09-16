@@ -49,12 +49,13 @@ jobs:
           mkdir -p build/${{ matrix.board }}/sdcard/
           echo test > build/${{ matrix.board }}/sdcard/file.txt
           echo test > build/${{ matrix.board }}/sdcard/file2.txt
+          tar -cvzf ${{ matrix.board}}.tar.gz build/${{ matrix.board }}/sdcard/*
 
       - uses: actions/upload-artifact@v3
         with:
           name: alkali-projects-${{ matrix.board }}
           path: |
-            build/${{ matrix.board }}/sdcard
+            ${{ matrix.board }}.tar.gz
 
   release:
     name: Create release
