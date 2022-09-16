@@ -49,30 +49,14 @@ jobs:
           mkdir -p build/${{ matrix.board }}/sdcard/
           echo test > build/${{ matrix.board }}/sdcard/file.txt
           echo test > build/${{ matrix.board }}/sdcard/file2.txt
-          tar -cvzf ${{ matrix.board}}.tar.gz build/${{ matrix.board }}/sdcard/*
+          mkdir -p release
+          tar -cvzf release/${{ matrix.board }}.tar.gz build/${{ matrix.board }}/sdcard/*
 
       - uses: actions/upload-artifact@v3
         with:
           name: alkali-projects-${{ matrix.board }}
           path: |
-            ${{ matrix.board }}.tar.gz
-
-  release:
-    name: Create release
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-      - name: Prerequisites
-        run: |
-          sudo apt update
-          sudo apt install -y tree
-
-      - uses: actions/download-artifact@v2
-        with:
-          path: release
-
-      - name: Structure
-        run: tree
+            release/${{ matrix.board }}.tar.gz
 
       - uses: pyTooling/Actions/releaser@r0
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
