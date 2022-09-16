@@ -57,7 +57,9 @@ jobs:
             build/${{ matrix.board }}/sdcard
 
       - name: Prepare release
-        run: tar -cvzf build/${{ matrix.board }}.tar.gz -C build/${{matrix.board}}/sdcard .
+        run: |
+          cd build/${{matrix.board}}/sdcard/
+          zip -r ../../${{matrix.board}}.zip
 
       - uses: pyTooling/Actions/releaser@r0
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
