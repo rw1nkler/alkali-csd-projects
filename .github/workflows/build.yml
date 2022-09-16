@@ -52,3 +52,11 @@ jobs:
           name: alkali-projects-${{ matrix.board }}
           path: |
             build/${{ matrix.board }}/sdcard
+
+      - uses: pyTooling/Actions/releaser@r0
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: latest
+          files: |
+            build/${{ matrix.board }}/sdcard/*
