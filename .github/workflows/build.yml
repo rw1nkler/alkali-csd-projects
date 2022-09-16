@@ -79,4 +79,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: latest
           files: |
-            release/*
+            release/**
