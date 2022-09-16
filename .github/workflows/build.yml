@@ -60,7 +60,7 @@ jobs:
         run: |
           apt update && apt install -y zip
           cd build/${{matrix.board}}/sdcard/
-          zip -r ${GITHUB_WORKSPACE}/${{matrix.board}}.zip *
+          zip -r ${GITHUB_WORKSPACE}/build/${{matrix.board}}.zip *
 
       - uses: pyTooling/Actions/releaser@r0
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -68,4 +68,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: latest
           files: |
-            build/${{ matrix.board }}.tar.gz
+            build/${{ matrix.board }}.zip
