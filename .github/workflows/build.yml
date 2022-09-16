@@ -60,7 +60,7 @@ jobs:
         run: |
           apt update && apt install -y zip
           cd build/${{matrix.board}}/sdcard/
-          zip -r ../../${{matrix.board}}.zip
+          zip -r ${GITHUB_WORKSPACE}/${{matrix.board}}.zip *
 
       - uses: pyTooling/Actions/releaser@r0
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
