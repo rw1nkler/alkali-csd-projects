@@ -17,13 +17,13 @@ jobs:
       RELEASE_URL: https://github.com/antmicro/alkali-csd-hw/releases/download/v1.0/${{ matrix.board }}.zip
 
     steps:
-      - name: Check out the repo
-        uses: actions/checkout@v3
-        with:
-          submodules: 'recursive'
+      # - name: Check out the repo
+      #   uses: actions/checkout@v3
+      #   with:
+      #     submodules: 'recursive'
 
-      - name: Apply workaround for broken Buildroot mirror
-        run: echo "1.1.1.1 invisible-mirror.net" | tee -a /etc/hosts
+      # - name: Apply workaround for broken Buildroot mirror
+      #   run: echo "1.1.1.1 invisible-mirror.net" | tee -a /etc/hosts
 
       # - name: Build hardware (without Vivado + prebuilts)
       #   run: |
