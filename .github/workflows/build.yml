@@ -49,14 +49,13 @@ jobs:
           mkdir -p build/${{ matrix.board }}/sdcard/
           echo test > build/${{ matrix.board }}/sdcard/file.txt
           echo test > build/${{ matrix.board }}/sdcard/file2.txt
-          mkdir -p release
-          tar -cvzf release/${{ matrix.board }}.tar.gz build/${{ matrix.board }}/sdcard/*
+          tar -cvzf build/${{ matrix.board }}.tar.gz -C build/${{matrix.board}}/sdcard .
 
       - uses: actions/upload-artifact@v3
         with:
           name: alkali-projects-${{ matrix.board }}
           path: |
-            release/${{ matrix.board }}.tar.gz
+            build/${{ matrix.board }}.tar.gz
 
       - uses: pyTooling/Actions/releaser@r0
         if: github.event_name == 'push' && github.ref == 'refs/heads/main'
@@ -64,4 +63,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: latest
           files: |
-            release/**
+            build/${{ matrix.board }}.tar.gz
