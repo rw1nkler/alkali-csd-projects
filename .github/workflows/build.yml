@@ -48,6 +48,7 @@ jobs:
         run: |
           mkdir -p build/${{ matrix.board }}/sdcard/
           echo test > build/${{ matrix.board }}/sdcard/file.txt
+          echo test > build/${{ matrix.board }}/sdcard/file2.txt
 
       - uses: actions/upload-artifact@v3
         with:
